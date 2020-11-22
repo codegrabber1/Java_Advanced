@@ -1,5 +1,10 @@
 package servlet;
 
+import daoService.UserService;
+import daoService.impl.UserServiceImplementation;
+import models.User;
+import models.UserRole;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +16,7 @@ import java.io.IOException;
 @WebServlet(name = "RegistrationServlet")
 public class RegistrationServlet extends HttpServlet {
 
-    private UserService userService = UserService.getUserService();
+    private UserService userService = UserServiceImplementation.getUserService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String firstName = request.getParameter("name");
@@ -19,7 +24,10 @@ public class RegistrationServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("pass");
 
-        userService.safeUser(new User(firstName, lastName, email, password));
+        if(!firstName.isEmpty() && !lastName.isEmpty() && !email.isEmpty() && !password.isEmpty()){
+
+            userService.create(new User(firstName, lastName, email, UserRole.USER.toString() ,password));
+        }
         HttpSession session = request.getSession(true);
 
         session.setAttribute("email", email);

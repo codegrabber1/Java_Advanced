@@ -1,5 +1,9 @@
 package servlet;
 
+import daoService.impl.UserServiceImplementation;
+import daoService.UserService;
+import models.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,24 +13,26 @@ import java.io.IOException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String login = request.getParameter("login");
+    private UserService userService = UserServiceImplementation.getUserService();
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String email = request.getParameter("login");
         String pass = request.getParameter("pass");
 
-        UserService userService = UserService.getUserService();
-        User user = userService.getUserEmail(login);
+        User user = userService.getUserByMail(email);
 
-        if(user == null){
-            request.getRequestDispatcher("login.jsp").forward(request,response);
-        }
 
-        if(user.getPassword().equals(pass)){
-            request.setAttribute("email", login);
+        if(user != null && user.getPassword().equals(pass)){
+            request.setAttribute("email", email);
             request.getRequestDispatcher("cabinet.jsp").forward(request,response);
+        }else {
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
 
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+
 
     }
 

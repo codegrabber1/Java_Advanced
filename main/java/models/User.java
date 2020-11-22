@@ -8,20 +8,23 @@ public class User {
     private String firstName;
     private String lastName;
     private String role;
+    private String password;
 
-    public User(String email, String firstName, String lastName, String role) {
+    public User(String email, String firstName, String lastName, String role, String password ) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
+        this.password = password;
     }
 
-    public User(int id, String email, String firstName, String lastName, String role) {
+    public User(Integer id, String email, String firstName, String lastName, String role, String password ) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
+        this.password = password;
     }
 
     public int getId() {
@@ -64,6 +67,14 @@ public class User {
         this.role = role;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -90,6 +101,7 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", role='" + role + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

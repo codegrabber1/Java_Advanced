@@ -2,6 +2,7 @@ package dao.impl;
 
 import dao.BucketDao;
 import models.Bucket;
+import org.apache.log4j.Logger;
 import utills.ConnectionsUtils;
 
 import java.sql.*;
@@ -15,6 +16,8 @@ public class BucketCrudImplementation implements BucketDao {
     private static String READ_BY_ID = "select * from bucket where id = ?";
     private static String UPDATE_BY_ID = "update bucket set user_id=?, product_id=?, purchace_date=? where id = ?";
     private static String DELETE_BY_ID = "delete from bucket where id = ?";
+
+    private static Logger LOG = Logger.getLogger(BucketCrudImplementation.class);
 
     private Connection connection;
     private PreparedStatement preparedStatement;
@@ -37,7 +40,7 @@ public class BucketCrudImplementation implements BucketDao {
                 buckets.add(new Bucket(userId, productId,purchaseDate));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         }
         return buckets;
     }
@@ -52,11 +55,11 @@ public class BucketCrudImplementation implements BucketDao {
             preparedStatement.executeUpdate();
 
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
-
+            resultSet.next();
             bucket.setId(resultSet.getInt(1));
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         }
 
         return bucket;
@@ -79,7 +82,7 @@ public class BucketCrudImplementation implements BucketDao {
             bucket = new Bucket(bucketId, userId, productId,purchaseDate);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         }
 
         return bucket;

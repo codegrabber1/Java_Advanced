@@ -2,28 +2,36 @@ package daoService.impl;
 
 import dao.ProductDao;
 import dao.impl.ProductCrudImplementation;
+import daoService.ProductService;
 import models.Product;
+import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class ProductServiceImplementation implements ProductDao {
+public class ProductServiceImplementation implements ProductService {
+
+    private static Logger LOG = Logger.getLogger(ProductServiceImplementation.class);
 
     private ProductDao productCrud;
+    private static ProductServiceImplementation productService;
 
-    public ProductServiceImplementation(){
+    private ProductServiceImplementation(){
         try {
             productCrud = new ProductCrudImplementation();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException e) {
+            LOG.error(e);
         }
     }
+
+    public static ProductService getProductService(){
+        if(productService == null) {
+            productService = new ProductServiceImplementation();
+        }
+
+        return productService;
+    }
+
     @Override
     public List<Product> readAll() {
         return productCrud.readAll();

@@ -2,6 +2,7 @@ package dao.impl;
 
 import dao.ProductDao;
 import models.Product;
+import org.apache.log4j.Logger;
 import utills.ConnectionsUtils;
 
 import java.sql.Connection;
@@ -18,6 +19,8 @@ public class ProductCrudImplementation implements ProductDao {
     private static String READ_BY_ID = "select * from products where id = ?";
     private static String UPDATE_BY_ID = "update products set name=?, description=?, price=? where id = ?";
     private static String DELETE_BY_ID = "delete from products where id = ?";
+
+    private static Logger LOG = Logger.getLogger(ProductCrudImplementation.class);
 
     private Connection connection;
     private PreparedStatement preparedStatement;
@@ -59,7 +62,7 @@ public class ProductCrudImplementation implements ProductDao {
             preparedStatement.setDouble(3, product.getPrice());
 
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
-
+            resultSet.next();
             product.setId(resultSet.getInt(1));
 
         } catch (SQLException e) {

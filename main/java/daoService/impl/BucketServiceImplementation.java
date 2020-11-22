@@ -4,26 +4,31 @@ import dao.BucketDao;
 import dao.impl.BucketCrudImplementation;
 import daoService.BucketService;
 import models.Bucket;
+import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class BucketServiceImplementation implements BucketService {
+    private static Logger LOG = Logger.getLogger(BucketServiceImplementation.class);
+
+    private static BucketServiceImplementation bucketServiceImplementation;
 
     private BucketDao bucketCrud;
 
-    public BucketServiceImplementation(){
+    private BucketServiceImplementation(){
         try {
             bucketCrud = new BucketCrudImplementation();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException e) {
+            LOG.error(e);
         }
+    }
+
+    public static BucketService getBucketService(){
+        if(bucketServiceImplementation == null) {
+            bucketServiceImplementation = new BucketServiceImplementation();
+        }
+        return bucketServiceImplementation;
     }
 
     @Override

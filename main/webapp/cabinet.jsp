@@ -14,6 +14,7 @@
         <div class="row">
             <div class="form_block">
                 <h1>Вітаю, ${firstName}!</h1>
+                <p>Ваш email = ${email}</p>
             </div>
         </div>
     </div>
