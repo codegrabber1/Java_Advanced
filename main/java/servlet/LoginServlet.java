@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("email", email);
             request.getRequestDispatcher("cabinet.jsp").forward(request,response);
         }else {
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
 
 
@@ -37,6 +37,6 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }

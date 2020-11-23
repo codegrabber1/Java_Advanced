@@ -17,38 +17,73 @@
 <div class="container">
     <div class="row">
         <div class="form_block">
-            <form action="registration" method="post">
-                <div class="row">
-                <div class="col-12 col-md-6">
-                    <p>
-                        <label for="name">Ваше ім'я:</label>
-                        <input type="text" id="name" name="name">
-                    </p>
-                </div>
-                <div class="col-12 col-md-6">
-                    <p>
-                        <label for="lname">Ваше прізвище:</label>
-                        <input type="text" id="lname" name="lastname">
-                    </p>
-                </div>
-                <div class="col-md-12">
-                    <p>
-                        <label for="email">Ваш email:</label>
-                        <input type="email" id="email" name="email">
-                    </p>
-                    <p>
-                        <label for="pass">Ваш пароль:</label>
-                        <input type="password" id="pass" name="pass">
-                    </p>
-                </div>
+            <ul class="nav nav-tabs" id="authTabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#register" role="tab">Реєстрація</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#auth" role="tab">Авторизація</a>
+                </li>
+
+            </ul>
+            <div class="tab-content">
+                <!-- Первый блок (он отображается по умолчанию, т.к. имеет классы show и active) -->
+                <div class="tab-pane fade show active" role="tabpanel" id="register">
+                    <form action="registration" method="post">
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <p>
+                                    <label for="name">Ваше ім'я:</label>
+                                    <input type="text" id="name" name="name">
+                                </p>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <p>
+                                    <label for="lname">Ваше прізвище:</label>
+                                    <input type="text" id="lname" name="lastname">
+                                </p>
+                            </div>
+                            <div class="col-md-12">
+                                <p>
+                                    <label for="email">Ваш email:</label>
+                                    <input type="email" id="email" name="email">
+                                </p>
+                                <p>
+                                    <label for="pass">Ваш пароль:</label>
+                                    <input type="password" id="pass" name="pass">
+                                </p>
+                            </div>
+                        </div>
+                        <input type="submit" class="btn btn-warning" value="Відправити">
+                    </form>
                 </div>
 
-                <input type="submit" class="btn btn-warning" value="Відправити">
-            </form>
+                <div class="tab-pane fade" role="tabpanel" id="auth">
+                    <form action="login" method="post">
+                        <div class="row">
+                            <div class="col-12 col-md-12">
+                                <p>
+                                    <label for="login">Ваш логін:</label>
+                                    <input type="email" id="login" name="login">
+                                </p>
+                                <p>
+                                    <label for="pass">Ваш пароль:</label>
+                                    <input type="password" id="pass" name="pass">
+                                </p>
+                            </div>
+                        </div>
+
+                        <input type="submit" class="btn btn-warning" value="Відправити">
+                    </form>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
 </div>
 <jsp:include page="footer.jsp"></jsp:include>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -46,6 +46,9 @@ input[type="submit"]{
 
     width: auto;
 }
+.tab-pane {
+    padding: 20px 0;
+}
 header,
 footer {
     height: 50px;
