@@ -27,16 +27,15 @@
 
             </ul>
             <div class="tab-content">
-                <!-- Первый блок (он отображается по умолчанию, т.к. имеет классы show и active) -->
                 <div class="tab-pane fade show active" role="tabpanel" id="register">
                     <form action="registration" method="post">
                         <div class="row">
                             <div class="col-12 col-md-6">
                                 <p>
-                                    <label for="name">Ваше ім'я:</label>
-                                    <input type="text" id="name" name="name">
+                                    <label for="register_name">Ваше ім'я:</label>
+                                    <input type="text" id="register_name" name="name">
                                 </p>
-                            </div>
+                             </div>
                             <div class="col-12 col-md-6">
                                 <p>
                                     <label for="lname">Ваше прізвище:</label>
@@ -45,16 +44,16 @@
                             </div>
                             <div class="col-md-12">
                                 <p>
-                                    <label for="email">Ваш email:</label>
-                                    <input type="email" id="email" name="email">
+                                    <label for="register_email">Ваш email:</label>
+                                    <input type="email" id="register_email" name="email">
                                 </p>
                                 <p>
-                                    <label for="pass">Ваш пароль:</label>
-                                    <input type="password" id="pass" name="pass">
+                                    <label for="register_pass">Ваш пароль:</label>
+                                    <input type="password" id="register_pass" name="pass">
                                 </p>
                             </div>
                         </div>
-                        <input type="submit" class="btn btn-warning" value="Відправити">
+                        <input type="submit" name="btnSubmit" class="btn btn-warning btnRegistration" value="Відправити">
                     </form>
                 </div>
 
@@ -67,13 +66,13 @@
                                     <input type="email" id="login" name="login">
                                 </p>
                                 <p>
-                                    <label for="pass">Ваш пароль:</label>
-                                    <input type="password" id="pass" name="pass">
+                                    <label for="password">Ваш пароль:</label>
+                                    <input type="password" id="password" name="pass">
                                 </p>
                             </div>
                         </div>
 
-                        <input type="submit" class="btn btn-warning" value="Відправити">
+                        <input type="submit" class="btn btn-warning btnLogin" value="Відправити">
                     </form>
 
                 </div>
@@ -85,5 +84,6 @@
 <jsp:include page="footer.jsp"></jsp:include>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
+<script src="js/scripts.js"></script>
 </body>
 </html>

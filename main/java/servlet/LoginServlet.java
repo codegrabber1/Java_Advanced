@@ -1,7 +1,9 @@
 package servlet;
 
-import daoService.impl.UserServiceImplementation;
+import com.google.gson.Gson;
 import daoService.UserService;
+import daoService.impl.UserServiceImplementation;
+import dto.UserLogin;
 import models.User;
 
 import javax.servlet.ServletException;
@@ -26,14 +28,19 @@ public class LoginServlet extends HttpServlet {
 
 
         if(user != null && user.getPassword().equals(pass)){
-            request.setAttribute("email", email);
-            request.getRequestDispatcher("cabinet.jsp").forward(request,response);
+
+            UserLogin userLogin = new UserLogin();
+            userLogin.destinationUrl = "cabinet.jsp";
+            userLogin.userEmail = user.getEmail();
+
+            String json = new Gson().toJson(userLogin);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
         }else {
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
-
-
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

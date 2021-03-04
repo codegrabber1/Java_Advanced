@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet(name = "RegistrationServlet")
+@WebServlet("/RegistrationServlet")
 public class RegistrationServlet extends HttpServlet {
 
     private UserService userService = UserServiceImplementation.getUserService();
@@ -33,7 +33,11 @@ public class RegistrationServlet extends HttpServlet {
         session.setAttribute("email", email);
         session.setAttribute("firstName", firstName);
 
-        request.getRequestDispatcher("cabinet.jsp").forward(request,response);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("Success");
+
+//        request.getRequestDispatcher("cabinet.jsp").forward(request,response);
 
     }
 
